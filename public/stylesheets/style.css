@@ -105,6 +105,7 @@ select.form-control:hover {
 }
 
 .control {
+  padding: 0.5rem;
   display: flex;
   background-color: #dfdddd;
   justify-content: flex-end;
@@ -113,6 +114,12 @@ select.form-control:hover {
 
 .control a {
   margin-right: 10px;
+  text-decoration: none;
+  color: #383838;
+}
+
+.control a:hover {
+  color: #9b4b4b;
 }
 
 .restaurant-category {

@@ -6,9 +6,11 @@ const Restaurant = require('../models/restaurant')
 // 引入路由模組
 const home = require('./modules/home') // 引入 home 模組程式碼
 const restaurants = require('./modules/restaurants')
+const users = require('./modules/users')
 // 將網址結構符合 / 字串的 request 導向 home 模組 
 router.use('/', home)
 router.use('/restaurants', restaurants)
+router.use('/users', users)
 
 // search for name, category, rating
 router.get('/search', (req, res) => {
@@ -35,28 +37,36 @@ router.get('/search', (req, res) => {
 //sort restaurant
 router.get('/sort', (req, res) => {
   const sort = req.query.sort_type
+  let innerText = ''
   if (sort === 'asc' || sort === 'desc') {
+    if (sort === 'asc') {
+      innerText = 'A -> Z'
+    } else {
+      innerText = 'Z -> A'
+    }
     return Restaurant.find()
     .lean()
-    .sort({_id: sort})
+    .sort({name_en: sort})
     .then((restaurant) => {
-      res.render('index', {restaurant, sort})
+      res.render('index', {restaurant, sort, innerText})
     })
     .catch(error => console.log(error))
   } else if (sort === 'category') {
+    innerText = '類別'
     return Restaurant.find()
     .lean()
     .sort({category: 'asc'})
     .then((restaurant) => {
-      res.render('index', {restaurant, sort})
+      res.render('index', {restaurant, sort, innerText})
     })
     .catch(error => console.log(error))
   } else if (sort === 'location') {
+    innerText = '地區'
     return Restaurant.find()
     .lean()
     .sort({location: 'asc'})
     .then((restaurant) => {
-      res.render('index', {restaurant, sort})
+      res.render('index', {restaurant, sort, innerText})
     })
     .catch(error => console.log(error))
   }

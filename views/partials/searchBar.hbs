@@ -32,7 +32,7 @@
           <form class="d-flex justify-content-between align-items-center" action="/sort" method="get">
             <label class="d-flex align-items-center w-75" for="sort">排序：</label>
             <select class="form-control" name="sort_type" id="sort" onchange="this.form.submit()">
-              <option value="{{sort}}" style="display:none" selected></option>
+              <option value="{{sort}}" style="display:none" selected>{{innerText}}</option>
               <option value="asc">A -> Z</option>
               <option value="desc">Z -> A</option>
               <option value="category">類別</option>
