@@ -37,6 +37,12 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  userId: { //加入關聯設定，利用使用者 ID 分類餐廳資料是哪個使用者的
+    type: Schema.Types.ObjectID,
+    ref: 'User',
+    index: true,
+    required: true
   }
 })
 
