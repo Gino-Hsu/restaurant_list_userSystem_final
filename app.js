@@ -1,5 +1,6 @@
 // require packages used in the project
 const express = require('express')
+const session = require('express-session') //載入 express session
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
@@ -14,10 +15,16 @@ app.engine('hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', 'hbs')
 
 // setting static files
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes) // 將 request 導入路由器
+
 
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)
