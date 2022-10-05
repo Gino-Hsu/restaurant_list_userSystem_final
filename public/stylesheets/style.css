@@ -81,7 +81,7 @@ select.form-control:hover {
   align-items: center;
 }
 
-.card {
+.index-card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
@@ -90,11 +90,11 @@ select.form-control:hover {
   margin-bottom: 0;
 }
 
-.card:hover {
+.index-card:hover {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
 }
 
-.card img {
+.index-card img {
   height: 180px;
 }
 
@@ -159,6 +159,18 @@ select.form-control:hover {
   justify-content: space-around;
   align-items: center;
 }
+
+/* login */
+.login-container {
+  margin-top: -150px;
+}
+
+.login-card {
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fce2cf;
+}
+
+
 
 @keyframes scale-up {
   from {
