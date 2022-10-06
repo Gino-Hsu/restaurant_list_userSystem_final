@@ -1,5 +1,6 @@
 const express = require('express')
 const passport = require('passport') // 引用 passport
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 // 載入 User Model
@@ -13,8 +14,8 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/users/login',
-  badRequestMessage: '所有欄位為必填！',
-  failureFlash: true
+  badRequestMessage: '所有欄位為必填！', // 信箱或密碼空白時，錯誤訊息
+  failureFlash: true // 使用 flash
 }))
 
 router.get('/register', (req, res) => {
@@ -50,13 +51,16 @@ router.post('/register', (req, res) => {
       wrong_msgs.push({ message: '這個 Email 已被註冊過了。' })
       return res.render('register', {wrong_msgs, name, email, password, confirmPassword})
     }
-    return User.create({
-      name,
-      email,
-      password
-    })
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
+    return bcrypt
+      .genSalt(10)
+      .then(salt => bcrypt.hash(password, salt))
+      .then(hash => User. create({
+        name,
+        email,
+        password: hash
+      }))
+      .then(() => res.redirect('/'))
+      .catch(err => console.log(err))
   })
   .catch(err => console.log(err))
 })
