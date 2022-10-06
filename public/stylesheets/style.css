@@ -167,6 +167,7 @@ select.form-control:hover {
 /* login */
 .user-container {
   margin-top: -150px;
+  padding-bottom: 150px;
 }
 
 .user-card {
