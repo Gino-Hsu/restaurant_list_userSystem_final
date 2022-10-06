@@ -10,6 +10,10 @@ const methodOverride = require('method-override')
 const routes = require('./routes') // 引用路由器
 const flash = require('connect-flash') // 引用 flash 套件
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 require('./config/mongoose')
 
 // setting template engine
